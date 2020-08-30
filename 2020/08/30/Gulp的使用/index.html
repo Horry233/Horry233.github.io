@@ -1,0 +1,257 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="Horry"><meta name="copyright" content="Horry"><meta name="generator" content="Hexo 5.0.2"><meta name="theme" content="hexo-theme-yun"><title>Gulp的使用 | 憨憨の站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="none" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.19/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_stqaphw3j4.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>document.addEventListener("DOMContentLoaded", () => {
+  [".post-card",".post-content img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+});
+</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/auto-render.min.js"></script><script>document.addEventListener("DOMContentLoaded", function() {
+  renderMathInElement(document.body, {
+    delimiters: [
+      {left: "$$", right: "$$", display: true},
+      {left: "$", right: "$", display: false},
+      {left: "\\(", right: "\\)", display: false},
+      {left: "\\[", right: "\\]", display: true}
+    ]
+  });
+});</script><link rel="shortcut icon" type="image/svg+xml" href="/xiaozhu.ico"><link rel="mask-icon" href="/xiaozhu.ico" color="#0078E7"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"root":"/","title":"春风得意马蹄疾","version":"0.9.6","anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"https://v1.hitokoto.cn","hitokoto":true},"fireworks":{"colors":["187, 104, 225","240, 107, 210","243, 54, 188"]}};
+  </script><meta name="description" content="什么是Gulp Gulp 是一个自动化工具，前端开发者可以使用它来处理常见任务： 搭建web服务器 文件保存时自动重载浏览器 使用预处理器如Sass、LESS 优化资源，比如压缩CSS、JavaScript、压缩图片    Gulp的安装首先保证安装了nodejs  在命令行窗口，或者在Git Bash窗口中  输入 npm(cnpm)  install gulp   注意安装的路径是在当前命令行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gulp的使用">
+<meta property="og:url" content="http://horry233.github.io/2020/08/30/Gulp%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="憨憨の站">
+<meta property="og:description" content="什么是Gulp Gulp 是一个自动化工具，前端开发者可以使用它来处理常见任务： 搭建web服务器 文件保存时自动重载浏览器 使用预处理器如Sass、LESS 优化资源，比如压缩CSS、JavaScript、压缩图片    Gulp的安装首先保证安装了nodejs  在命令行窗口，或者在Git Bash窗口中  输入 npm(cnpm)  install gulp   注意安装的路径是在当前命令行">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://horry233.github.io/2020/08/30/Gulp%E7%9A%84%E4%BD%BF%E7%94%A8/Snipaste_2020-08-30_11-44-32.png">
+<meta property="og:image" content="http://horry233.github.io/2020/08/30/Gulp%E7%9A%84%E4%BD%BF%E7%94%A8/Snipaste_2020-08-30_15-50-45.png">
+<meta property="og:image" content="http://horry233.github.io/2020/08/30/Gulp%E7%9A%84%E4%BD%BF%E7%94%A8/%E5%9B%BE%E7%89%871.png">
+<meta property="og:image" content="http://horry233.github.io/2020/08/30/Gulp%E7%9A%84%E4%BD%BF%E7%94%A8/%E5%9B%BE%E7%89%872.png">
+<meta property="article:published_time" content="2020-08-29T16:41:02.000Z">
+<meta property="article:modified_time" content="2020-08-30T08:29:52.209Z">
+<meta property="article:author" content="Horry">
+<meta property="article:tag" content="Gulp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://horry233.github.io/2020/08/30/Gulp%E7%9A%84%E4%BD%BF%E7%94%A8/Snipaste_2020-08-30_11-44-32.png"><script src="/js/ui/mode.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.20.0/themes/prism.css" media="(prefers-color-scheme: light)"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.20.0/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script defer src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Horry"><img width="96" loading="lazy" src="https://wx3.sinaimg.cn/mw690/aeba2490gy1ghpdr7zlq0j20u00u0add.jpg" alt="Horry"></a><div class="site-author-name"><a href="/about/">Horry</a></div><a class="site-name" href="/about/site.html">憨憨の站</a><sub class="site-subtitle">保持好奇</sub><div class="site-desciption">前端在学了，在学了</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">13</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">0</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">9</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" title="知乎" target="_blank" style="color:#0084FF"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhihu-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-genderless-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFGulp"><span class="toc-number">1.</span> <span class="toc-text">什么是Gulp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gulp%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">Gulp的安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gulp%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">Gulp的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="toc-number">3.1.</span> <span class="toc-text">前期准备</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#nodejs%E6%A8%A1%E5%9D%97%E6%88%90%E5%91%98%E7%9A%84%E5%AF%BC%E5%87%BA%EF%BC%8C%E5%AF%BC%E5%85%A5"><span class="toc-number">3.1.1.</span> <span class="toc-text">nodejs模块成员的导出，导入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA"><span class="toc-number">3.1.2.</span> <span class="toc-text">导出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5"><span class="toc-number">3.1.3.</span> <span class="toc-text">导入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#node%E8%BF%90%E8%A1%8Cjs%E6%96%87%E4%BB%B6"><span class="toc-number">3.1.4.</span> <span class="toc-text">node运行js文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gulp%E7%9A%84%E5%B8%B8%E7%94%A8API"><span class="toc-number">3.2.</span> <span class="toc-text">Gulp的常用API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#gulp-task"><span class="toc-number">3.2.1.</span> <span class="toc-text">gulp.task()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#gulp-src"><span class="toc-number">3.2.2.</span> <span class="toc-text">gulp.src()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#gulp-dest"><span class="toc-number">3.2.3.</span> <span class="toc-text">gulp.dest()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#gulp-watch"><span class="toc-number">3.2.4.</span> <span class="toc-text">gulp.watch()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pipe"><span class="toc-number">3.2.5.</span> <span class="toc-text">.pipe()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E7%94%A8%E4%BE%8B%E5%AD%90"><span class="toc-number">3.3.</span> <span class="toc-text">运用例子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6"><span class="toc-number">3.3.1.</span> <span class="toc-text">常用插件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#package-json%E6%96%87%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">package.json文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E4%BE%9D%E8%B5%96"><span class="toc-number">4.1.</span> <span class="toc-text">项目依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E4%BE%9D%E8%B5%96"><span class="toc-number">4.2.</span> <span class="toc-text">开发依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%8C%85%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">4.3.</span> <span class="toc-text">下载包的注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#package-lock-json%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">4.4.</span> <span class="toc-text">package-lock.json文件的作用</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="http://horry233.github.io/2020/08/30/Gulp%E7%9A%84%E4%BD%BF%E7%94%A8/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Horry"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="憨憨の站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Gulp的使用</h1><div class="post-meta"><div class="post-time" style="display:inline-block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2020-08-30 00:41:02" itemprop="dateCreated datePublished" datetime="2020-08-30T00:41:02+08:00">2020-08-30</time></div><div class="post-classify"><span class="post-tag"><a class="tag" href="/tags/Gulp/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">Gulp</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#0078E7;"><h2 id="什么是Gulp"><a href="#什么是Gulp" class="headerlink" title="什么是Gulp"></a>什么是Gulp</h2><ul>
+<li>Gulp 是一个自动化工具，前端开发者可以使用它来处理常见任务：<ul>
+<li>搭建web服务器</li>
+<li>文件保存时自动重载浏览器</li>
+<li>使用预处理器如Sass、LESS</li>
+<li>优化资源，比如压缩CSS、JavaScript、压缩图片</li>
+</ul>
+</li>
+</ul>
+<h2 id="Gulp的安装"><a href="#Gulp的安装" class="headerlink" title="Gulp的安装"></a>Gulp的安装</h2><p>首先保证安装了nodejs </p>
+<p>在命令行窗口，或者在Git Bash窗口中  输入 npm(cnpm)  install gulp   注意安装的路径是在当前命令行的目录下，注意看当前位置</p>
+<p>-g 全局安装，安装到nodejs的目录下，安装后，以后在计算机的任何位置都可以使用这个包</p>
+<h2 id="Gulp的使用"><a href="#Gulp的使用" class="headerlink" title="Gulp的使用"></a>Gulp的使用</h2><h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><p>1.在项目根目录下下载gulp库文件 cnpm install gulp</p>
+<p>2.在项目根目录下建立gulpfile.js</p>
+<p>3.重构项目的文件夹结构  src目录放置源代码文件  dist目录放置构建后文件</p>
+<p>4.在gulpfile.js文件中编写任务</p>
+<p>5.在命令行工具中执行gulp任务</p>
+<p>文件目录结构如下：</p>
+<p><img src="/2020/08/30/Gulp%E7%9A%84%E4%BD%BF%E7%94%A8/Snipaste_2020-08-30_11-44-32.png" loading="lazy"></p>
+<h4 id="nodejs模块成员的导出，导入"><a href="#nodejs模块成员的导出，导入" class="headerlink" title="nodejs模块成员的导出，导入"></a>nodejs模块成员的导出，导入</h4><h4 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h4><p>exports 或者 module**.**exports </p>
+<p><strong>exports</strong>是<strong>module.exports</strong>的别名**(地址引用关系)<strong>，</strong>导出对象最终以module.exports为准**</p>
+<pre class="language-JavaScript" data-language="JavaScript"><code class="language-JavaScript"> &#x2F;&#x2F; a.js
+ &#x2F;&#x2F; 在模块内部定义变量
+let version &#x3D; 1.0;
+&#x2F;&#x2F; 在模块内部定义方法
+const sayHi &#x3D; name &#x3D;&gt; &#96;您好, $&#123;name&#125;&#96;;
+&#x2F;&#x2F; 向模块外部导出数据 
+exports.version &#x3D; version;
+exports.sayHi &#x3D; sayHi;
+</code></pre>
+
+
+
+<h4 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h4><p>require(’path‘) </p>
+<pre class="language-JavaScript" data-language="JavaScript"><code class="language-JavaScript"> &#x2F;&#x2F; b.js
+ &#x2F;&#x2F; 在b.js模块中导入模块a
+let a &#x3D; require(‘.&#x2F;a.js&#39;);
+ &#x2F;&#x2F; 输出b模块中的version变量
+console.log(a.version);
+ &#x2F;&#x2F; 调用b模块中的sayHi方法 并输出其返回值
+console.log(a.sayHi(&#39;赖小峰&#39;)); 
+</code></pre>
+
+
+
+<p>如果是导入系统模块，或者第三方模块，可以直接  require(“模块名”)</p>
+<p>fs 文件模块 主要用于读取文件，或者写入文件</p>
+<pre class="language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 1.通过模块的名字fs对模块进行引用
+const fs &#x3D; require(&#39;fs&#39;);
+
+&#x2F;&#x2F; 2.通过模块内部的readFile读取文件内容
+fs.readFile(&#39;.&#x2F;01.helloworld.js&#39;, &#39;utf8&#39;, (err, doc) &#x3D;&gt; &#123;
+    &#x2F;&#x2F; 如果文件读取出错err 是一个对象 包含错误信息
+    &#x2F;&#x2F; 如果文件读取正确 err是 null
+    &#x2F;&#x2F; doc 是文件读取的结果
+    console.log(err);
+    console.log(doc);
+&#125;);</code></pre>
+
+
+
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+fs<span class="token punctuation">.</span><span class="token function">writeFile</span><span class="token punctuation">(</span><span class="token string">'./demo.txt'</span><span class="token punctuation">,</span> <span class="token string">'即将要写入的内容'</span><span class="token punctuation">,</span> <span class="token parameter">err</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>err <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'文件内容写入成功'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code></pre>
+
+
+
+
+
+<h4 id="node运行js文件"><a href="#node运行js文件" class="headerlink" title="node运行js文件"></a><strong>node运行js文件</strong></h4><p>PS E:\WEB\11-13node+express\day01\code&gt; nodemon .\01.helloworld.js (nodemon是插件，用于实时观察文件的修改，平时用node即可)</p>
+<p><img src="/2020/08/30/Gulp%E7%9A%84%E4%BD%BF%E7%94%A8/Snipaste_2020-08-30_15-50-45.png" loading="lazy"></p>
+<h3 id="Gulp的常用API"><a href="#Gulp的常用API" class="headerlink" title="Gulp的常用API"></a>Gulp的常用API</h3><h4 id="gulp-task"><a href="#gulp-task" class="headerlink" title="gulp.task()"></a>gulp.task()</h4><p>创建任务</p>
+<p> gulp.task(‘任务名’, callback)</p>
+<p>如果想要这个任务执行多个多个任务，第一个参数，可以是一个数组，把多个任务一数组形式传入</p>
+<p>例如 <strong>gulp.task(‘default’, [‘htmlmin’, ‘cssmin’, ‘jsmin’, ‘copy’]);</strong></p>
+<h4 id="gulp-src"><a href="#gulp-src" class="headerlink" title="gulp.src()"></a>gulp.src()</h4><p>传入文件的路径 </p>
+<p>gulp.src(path[,options])   <strong>ptah里面要加引号</strong></p>
+<p>如果想要一个文件里面的所有文件，可以用通配符 *  例如  *<em>gulp.src(‘./code/js/</em>.js’)** 找到js文件下所有的js后缀文件 </p>
+<p>这个参数也可以传入数组</p>
+<h4 id="gulp-dest"><a href="#gulp-dest" class="headerlink" title="gulp.dest()"></a>gulp.dest()</h4><p>gulp.dest()方法是用来写文件的，其语法为：</p>
+<p>gulp.dest(path[,options])   <strong>ptah里面要加引号</strong></p>
+<h4 id="gulp-watch"><a href="#gulp-watch" class="headerlink" title="gulp.watch()"></a>gulp.watch()</h4><p>gulp.watch() 用来监视文件的变化，当文件发生变化后，我们可以利用它来执行相应的任务，例如文件压缩等。其语法为</p>
+<p>gulp.watch(glob[, opts], tasks)  </p>
+<h4 id="pipe"><a href="#pipe" class="headerlink" title=".pipe()"></a>.pipe()</h4><p> 把处理完的文件送到指定的路径</p>
+<p>.pipe(path)   <strong>ptah里面要加引号</strong></p>
+<h3 id="运用例子"><a href="#运用例子" class="headerlink" title="运用例子"></a>运用例子</h3><pre class="language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;引入gulp模块
+const gulp &#x3D; require(&#39;gulp&#39;);
+const htmlmin &#x3D; require(&#39;gulp-htmlmin&#39;);
+const fileinclude &#x3D; require(&#39;gulp-file-include&#39;);
+const less &#x3D; require(&#39;gulp-less&#39;);
+const csso &#x3D; require(&#39;gulp-csso&#39;);
+const babel &#x3D; require(&#39;gulp-babel&#39;);
+const uglify &#x3D; require(&#39;gulp-uglify&#39;);
+
+&#x2F;&#x2F;gulp.task 建立任务
+gulp.task(&#39;first&#39;, (done) &#x3D;&gt; &#123;
+    console.log(&#39;第一个gulp任务执行&#39;);
+
+    &#x2F;&#x2F;1.使用gulp.src获取要处理的第一个文件
+    gulp.src(&#39;.&#x2F;src&#x2F;css&#x2F;base.css&#39;)
+        .pipe(gulp.dest(&#39;dist&#x2F;css&#39;));
+    done();
+
+&#125;);
+
+&#x2F;&#x2F;html任务
+&#x2F;&#x2F;1.抽取html文件中的公共代码
+&#x2F;&#x2F;2.html文件中代码的压缩操作
+gulp.task(&#39;htmlmin&#39;, (done) &#x3D;&gt; &#123;
+    gulp.src(&#39;.&#x2F;src&#x2F;*.html&#39;)
+        .pipe(fileinclude())
+        &#x2F;&#x2F; 压缩html文件中的代码
+        .pipe(htmlmin(&#123; collapseWhitespace: true &#125;))
+        .pipe(gulp.dest(&#39;dist&#39;));
+    done();
+&#125;)
+
+
+&#x2F;&#x2F;css任务
+&#x2F;&#x2F;1.less语法转换
+&#x2F;&#x2F;2.css代码压缩
+gulp.task(&#39;cssmin&#39;, (done) &#x3D;&gt; &#123;
+    &#x2F;&#x2F;路径可以为一个数组，传入多个路径
+    &#x2F;&#x2F;选择css文件夹里面的less文件和css文件
+    gulp.src([&#39;.&#x2F;src&#x2F;css&#x2F;*.less&#39;, &#39;.&#x2F;src&#x2F;css&#x2F;*.css&#39;])
+        &#x2F;&#x2F;将less语法转换为css代码
+        .pipe(less())
+        &#x2F;&#x2F;将css代码压缩
+        .pipe(csso())
+        .pipe(gulp.dest(&#39;dist&#x2F;css&#39;))
+    done();
+&#125;)
+
+
+&#x2F;&#x2F;js任务
+&#x2F;&#x2F;1.ES6代码的转换
+&#x2F;&#x2F;2.代码的压缩
+gulp.task(&#39;jsmin&#39;, (done) &#x3D;&gt; &#123;
+    gulp.src(&#39;.&#x2F;src&#x2F;js&#x2F;*.js&#39;)
+        .pipe(babel(&#123;
+            &#x2F;&#x2F;他可以【判断当前代码的运行环境 将代码转换成当前运行环境所支持的代码
+            presets: [&#39;@babel&#x2F;env&#39;]
+        &#125;))
+        &#x2F;&#x2F;压缩js文件，混淆代码
+        .pipe(uglify())
+        .pipe(gulp.dest(&#39;dist&#x2F;js&#39;))
+    done();
+&#125;)
+
+
+&#x2F;&#x2F;复制文件夹
+gulp.task(&#39;copy&#39;, (done) &#x3D;&gt; &#123;
+    gulp.src(&#39;.&#x2F;src&#x2F;images&#x2F;*&#39;)
+        .pipe(gulp.dest(&#39;dist&#x2F;images&#39;));
+
+    gulp.src(&#39;.&#x2F;src&#x2F;lib&#x2F;*&#39;)
+        .pipe(gulp.dest(&#39;dist&#x2F;lib&#39;));
+    done();
+&#125;)
+
+
+&#x2F;&#x2F;一个任务 包含之前全部任务的功能
+&#x2F;&#x2F;平时运行的时候是&quot;gulp 任务名&quot; ，如果任务名是default 可以省略任务名直接用 &quot;gulp&quot;运行这个任务
+gulp.task(&#39;default&#39;, gulp.series([&#39;htmlmin&#39;, &#39;cssmin&#39;, &#39;jsmin&#39;, &#39;copy&#39;]));
+
+</code></pre>
+
+<h4 id="常用插件"><a href="#常用插件" class="headerlink" title="常用插件"></a>常用插件</h4><ol>
+<li>gulp-htmlmin ：html文件压缩</li>
+<li>gulp-file-include 公共文件包含</li>
+<li>gulp-csso ：压缩css</li>
+<li>gulp-babel ：JavaScript语法转化</li>
+<li>gulp-less: less语法转化</li>
+<li>gulp-uglify ：压缩混淆JavaScript</li>
+</ol>
+<p>下载的插件会放到一个node_modules文件夹里面</p>
+<h2 id="package-json文件"><a href="#package-json文件" class="headerlink" title="package.json文件"></a>package.json文件</h2><p><strong>node_modules</strong> <strong>文件夹的问题</strong></p>
+<p>1.文件夹以及文件过多过碎，当我们将项目整体拷贝给别人的时候,，传输速度会很慢很慢. </p>
+<p>2.复杂的模块依赖关系需要被记录，确保模块的版本和当前保持一致，否则会导致当前项目运行报错</p>
+<h3 id="项目依赖"><a href="#项目依赖" class="headerlink" title="项目依赖"></a>项目依赖</h3><p>在项目的开发阶段和线上运营阶段，都需要依赖的第三方包，称为项目依赖  (<strong>如果项目少了这个模块，运行不了</strong>)</p>
+<p>使用npm install 包名命令下载的文件会默认被添加到 package.json 文件的 dependencies 字段中</p>
+<p><img src="/2020/08/30/Gulp%E7%9A%84%E4%BD%BF%E7%94%A8/%E5%9B%BE%E7%89%871.png" loading="lazy"></p>
+<h3 id="开发依赖"><a href="#开发依赖" class="headerlink" title="开发依赖"></a>开发依赖</h3><p>在项目的开发阶段需要依赖，线上运营阶段不需要依赖的第三方包，称为开发依赖   (<strong>只有开发的时候才需要，上线后不需要</strong>)</p>
+<p>使用npm install 包名 –save-dev命令将包添加到package.json文件的devDependencies字段中</p>
+<p><img src="/2020/08/30/Gulp%E7%9A%84%E4%BD%BF%E7%94%A8/%E5%9B%BE%E7%89%872.png" loading="lazy"></p>
+<h3 id="下载包的注意事项"><a href="#下载包的注意事项" class="headerlink" title="下载包的注意事项"></a>下载包的注意事项</h3><p>npm install 在安装 npm 包时，有两种命令参数可以把它们的信息写入 package.json ，发布依赖，开发依赖</p>
+<p><strong>npm install xxxxxxx  –save || -S <em>// 运行依赖（发布）</em></strong></p>
+<ol>
+<li>安装模块到项目node_modules目录下。</li>
+<li><strong>会</strong>在package.json文件的<strong>dependencies</strong> 属性将模块依赖写入。</li>
+<li>运行 npm install 初始化项目时，会将模块下载到项目目录下。</li>
+<li>运行npm install –production或者注明NODE_ENV变量值为production时，<strong>会</strong>自动下载模块到node_modules目录中。</li>
+</ol>
+<p><strong>npm install xxxxxxx -–save-dev || -D <em>//开发依赖（辅助）</em></strong></p>
+<ol>
+<li>安装模块到项目node_modules目录下。</li>
+<li><strong>会</strong>在package.json文件的<strong>devDependencies</strong> 属性将模块依赖写入。</li>
+<li>运行 npm install 初始化项目时，会将模块下载到项目目录下。</li>
+<li>运行npm install –production或者注明NODE_ENV变量值为production时，<strong>不会</strong>自动下载模块到node_modules目录中。</li>
+</ol>
+<h3 id="package-lock-json文件的作用"><a href="#package-lock-json文件的作用" class="headerlink" title="package-lock.json文件的作用"></a><strong>package-lock.json文件的作用</strong></h3><p>锁定包的版本，确保再次下载时不会因为包版本不同而产生问题</p>
+<p>加快下载速度，因为该文件中已经记录了项目所依赖第三方包的树状结构和包的下载地址，重新安装时只需下载即可，不需要做额外的工作</p>
+</div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>Horry</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="http://horry233.github.io/2020/08/30/Gulp%E7%9A%84%E4%BD%BF%E7%94%A8/" title="Gulp的使用">http://horry233.github.io/2020/08/30/Gulp%E7%9A%84%E4%BD%BF%E7%94%A8/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> 许可协议。</li></ul></section></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/2020/08/28/%E7%BC%96%E7%A8%8B%E9%A2%98-%E9%9D%A2%E5%90%91%E5%8C%97%EF%BC%8C%E6%B1%82%E8%BD%AC%E5%90%91%E5%87%A0%E6%AC%A1%E5%90%8E%E7%9A%84%E9%9D%A2%E5%90%91%E7%9A%84%E6%96%B9%E5%90%91/" rel="next" title="编程题 面向北，求转向几次后的面向的方向"><span class="post-nav-text">编程题 面向北，求转向几次后的面向的方向</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div id="comment"><div class="comment-tooltip text-center"><span>点击按钮跳转 GitHub Issues 评论。</span><br><span>若没有本文 Issue，您可以使用 Comment 模版新建。</span><br><a class="hty-button hty-button--raised" id="github-issues" target="_blank" rel="noopener" href="https://github.com/YunYouJun/yunyoujun.github.io/issues?q=is:issue+Gulp的使用">GitHub Issues</a></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2020 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> Horry</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v5.0.2</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v0.9.6</span></div><div class="live_time"><span>我已经出生</span><span id="display_live_time"></span><span class="moe-text">啦(●'◡'●)</span><script>function blog_live_time() {
+  window.setTimeout(blog_live_time, 1000);
+  const start = new Date('2020-08-13T14:50:00');
+  const now = new Date();
+  const timeDiff = (now.getTime() - start.getTime());
+  const msPerMinute = 60 * 1000;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const passDay = Math.floor(timeDiff / msPerDay);
+  const passHour = Math.floor((timeDiff % msPerDay) / 60 / 60 / 1000);
+  const passMinute = Math.floor((timeDiff % msPerHour) / 60 / 1000);
+  const passSecond = Math.floor((timeDiff % msPerMinute) / 1000);
+  display_live_time.innerHTML = " " + passDay + " 天 " + passHour + " 小时 " + passMinute + " 分 " + passSecond + " 秒";
+}
+blog_live_time();
+</script></div></footer><a class="hty-icon-button" id="goUp" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a></div><script defer src="/js/utils.js"></script><script defer src="/js/hexo-theme-yun.js"></script></body></html>
