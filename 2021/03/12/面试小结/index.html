@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="Horry"><meta name="copyright" content="Horry"><meta name="generator" content="Hexo 5.0.2"><meta name="theme" content="hexo-theme-yun"><title>面试小结 | 憨憨の站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="none" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.19/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_stqaphw3j4.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>document.addEventListener("DOMContentLoaded", () => {
+  [".post-card",".post-content img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+});
+</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/auto-render.min.js"></script><script>document.addEventListener("DOMContentLoaded", function() {
+  renderMathInElement(document.body, {
+    delimiters: [
+      {left: "$$", right: "$$", display: true},
+      {left: "$", right: "$", display: false},
+      {left: "\\(", right: "\\)", display: false},
+      {left: "\\[", right: "\\]", display: true}
+    ]
+  });
+});</script><link rel="shortcut icon" type="image/svg+xml" href="/xiaozhu.ico"><link rel="mask-icon" href="/xiaozhu.ico" color="#0078E7"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"root":"/","title":"路漫漫其修远兮","version":"0.9.6","anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"https://v1.hitokoto.cn","hitokoto":true},"fireworks":{"colors":["187, 104, 225","240, 107, 210","243, 54, 188"]}};
+  </script><meta name="description" content="1.绑定事件的方法(1)在html标签中绑定，可以在该元素的properties的属性中可以查看到，也可以在事件监听中看到 &lt;button onclick&#x3D;&quot;show()&quot;&gt;点击&lt;button&gt;  一个事件触发两种方法 &lt;button onclick&#x3D;&quot;show();print()&quot;&gt;&lt;button&gt;    (2)js事件绑定，可以在该元素的properties的属性中可以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试小结">
+<meta property="og:url" content="http://horry233.github.io/2021/03/12/%E9%9D%A2%E8%AF%95%E5%B0%8F%E7%BB%93/index.html">
+<meta property="og:site_name" content="憨憨の站">
+<meta property="og:description" content="1.绑定事件的方法(1)在html标签中绑定，可以在该元素的properties的属性中可以查看到，也可以在事件监听中看到 &lt;button onclick&#x3D;&quot;show()&quot;&gt;点击&lt;button&gt;  一个事件触发两种方法 &lt;button onclick&#x3D;&quot;show();print()&quot;&gt;&lt;button&gt;    (2)js事件绑定，可以在该元素的properties的属性中可以">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-12T11:18:32.000Z">
+<meta property="article:modified_time" content="2021-03-13T08:52:04.631Z">
+<meta property="article:author" content="Horry">
+<meta property="article:tag" content="面试">
+<meta name="twitter:card" content="summary"><script src="/js/ui/mode.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.20.0/themes/prism.css" media="(prefers-color-scheme: light)"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.20.0/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script defer src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Horry"><img width="96" loading="lazy" src="https://wx3.sinaimg.cn/mw690/aeba2490gy1ghpdr7zlq0j20u00u0add.jpg" alt="Horry"></a><div class="site-author-name"><a href="/about/">Horry</a></div><a class="site-name" href="/about/site.html">憨憨の站</a><sub class="site-subtitle">保持好奇</sub><div class="site-desciption">前端在学了，在学了</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">54</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">0</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">17</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" title="知乎" target="_blank" style="color:#0084FF"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhihu-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-genderless-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%BB%91%E5%AE%9A%E4%BA%8B%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">1.绑定事件的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number">2.</span> <span class="toc-text">2.执行上下文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%98%AF%E6%95%B0%E7%BB%84"><span class="toc-number">3.</span> <span class="toc-text">3.判断是否是数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-HTTP%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-number">4.</span> <span class="toc-text">4.HTTP状态码</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="http://horry233.github.io/2021/03/12/%E9%9D%A2%E8%AF%95%E5%B0%8F%E7%BB%93/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Horry"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="憨憨の站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">面试小结</h1><div class="post-meta"><div class="post-time" style="display:inline-block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2021-03-12 19:18:32" itemprop="dateCreated datePublished" datetime="2021-03-12T19:18:32+08:00">2021-03-12</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-2-line"></use></svg></span> <time title="修改时间：2021-03-13 16:52:04" itemprop="dateModified" datetime="2021-03-13T16:52:04+08:00">2021-03-13</time></div><div class="post-classify"><span class="post-tag"><a class="tag" href="/tags/%E9%9D%A2%E8%AF%95/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">面试</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#0078E7;"><h2 id="1-绑定事件的方法"><a href="#1-绑定事件的方法" class="headerlink" title="1.绑定事件的方法"></a>1.绑定事件的方法</h2><p>(1)在html标签中绑定，可以在该元素的properties的属性中可以查看到，也可以在事件监听中看到</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>show()<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>点击<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span><span class="token punctuation">></span></span></code></pre>
+
+<p>一个事件触发两种方法</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>show();print()<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span><span class="token punctuation">></span></span></code></pre>
+
+
+
+<p>(2)js事件绑定，可以在该元素的properties的属性中可以查看到，也可以在事件监听中看到</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>btn<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>点击<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span>
+    let btn = document.querySelector("#btn")
+    btn.onclick = function() &#123;&#125;
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span></code></pre>
+
+<p>用js绑定的方法，一个事件不能同时绑定方法</p>
+<p>(3)事件监听，只能在该元素的事件监听中看到</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>btn<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>点击<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span>
+    let btn = document.querySelector("#btn")
+    btn.addEventListener("click",function()&#123;&#125;)
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span></code></pre>
+
+<p>用事件监听的方法，可以同时绑定多个方法</p>
+<h2 id="2-执行上下文"><a href="#2-执行上下文" class="headerlink" title="2.执行上下文"></a>2.执行上下文</h2><p>(1)上下文 vs 作用域</p>
+<p>（1）首先需要说明的是<strong>上下文和作用域是不同的概念</strong>。</p>
+<p>（2）每个函数调用都有与之相关的作用域和上下文。从根本上说，作用域是基于<strong>函数</strong>，而上下文是基于<strong>对象</strong>。</p>
+<p>（3）作用域是和每次<strong>函数调用时变量的访问有关</strong>，并且<strong>每次调用都是独立的</strong>。上下文总是关键字 <strong>this 的值</strong>，是调用当前可执行代码的对象的引用。</p>
+<p>(2)“this” 上下文</p>
+<p>（1）上下文通常是<strong>取决于</strong>一个函数如何被调用。当<strong>函数作为对象的方法</strong>被调用时，this 指向<strong>调用方法的对象</strong>。</p>
+<p>（2）当调用一个函数时，通过 <strong>new</strong> 操作符创建一个对象的实例，当以这种方式调用时，this 指向<strong>新创建的实例</strong>。</p>
+<p>（3）当调用一个<strong>未绑定函数</strong>，this 默认指向<strong>全局上下文</strong>或者<strong>浏览器中的window对象</strong>。然而如果函数在<strong>严格模式</strong>下被执行(“use strict”)，this 默认指向 <strong>undefined</strong>。</p>
+<p>(3)执行上下文</p>
+<p>（1）当函数执行时，会创建一个称为执行上下文的内部对象（<strong>可理解为作用域，不是前面讨论的上下文</strong>）。一个执行上下文定义了一个<strong>函数执行时的环境</strong>。</p>
+<p>（2）函数每次执行时对应的执行上下文都是<strong>独一无二</strong>的，所以多次调用一个函数会导致创建多个执行上下文。</p>
+<p>（3）当javascript代码文件被浏览器载入后，默认最先进入的是一个<strong>全局的执行上下文</strong>。当在全局上下文中调用执行一个函数时，程序流就进入该被调用函数内，此时引擎就会为该函数创建一个<strong>新的执行上下文</strong>，并且将其压入到<strong>执行栈顶部（作用域链）</strong>。浏览器总是执行位于<strong>执行栈顶部的当前执行上下文</strong>，一旦执行完毕，该执行上下文就会从执行栈顶部<strong>弹出</strong>，并且控制权将进入<strong>其下的</strong>执行上下文。这样，执行栈中的执行上下文就会被依次执行并且弹出，直到回到全局的执行上下文。</p>
+<p>执行上下文分为：</p>
+<ul>
+<li>全局执行上下文<br>创建一个全局的window对象，并规定this指向window，执行js的时候就压入栈底，关闭浏览器的时候才弹出</li>
+<li>函数执行上下文<br>每次函数调用时，都会新创建一个函数执行上下文<br>执行上下文分为创建阶段和执行阶段<br>创建阶段：函数环境会创建变量对象：arguments对象（并赋值）、函数声明（并赋值）、变量声明（不赋值），函数表达式声明（不赋值）；会确定this指向；会确定作用域<br>执行阶段：变量赋值、函数表达式赋值，使变量对象编程活跃对象</li>
+<li>eval执行上下文</li>
+</ul>
+<p>执行栈：</p>
+<ul>
+<li>首先栈特点：先进后出</li>
+<li>当进入一个执行环境，就会创建出它的执行上下文，然后进行压栈，当程序执行完成时，它的执行上下文就会被销毁，进行弹栈。</li>
+<li>栈底永远是全局环境的执行上下文，栈顶永远是正在执行函数的执行上下文</li>
+<li>只有浏览器关闭的时候全局执行上下文才会弹出</li>
+</ul>
+<h2 id="3-判断是否是数组"><a href="#3-判断是否是数组" class="headerlink" title="3.判断是否是数组"></a>3.判断是否是数组</h2><p>(1)用instanceof</p>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">isArray</span><span class="token punctuation">(</span><span class="token parameter">arr</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr <span class="token keyword">instanceof</span> <span class="token class-name">Array</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+
+
+<p>(2)使用Object.prototype.toString.call(arr)</p>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">isArray</span><span class="token punctuation">(</span><span class="token parameter">o</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+　　<span class="token keyword">return</span> <span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+
+
+<p>(3)使用Array.isArray</p>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">isArray</span><span class="token punctuation">(</span><span class="token parameter">arr</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+
+
+
+
+<h2 id="4-HTTP状态码"><a href="#4-HTTP状态码" class="headerlink" title="4.HTTP状态码"></a>4.HTTP状态码</h2><ul>
+<li>2开头的表示成功<ul>
+<li>一般见到的就是200</li>
+</ul>
+</li>
+<li>3开头的表示重定向<ul>
+<li>301永久重定向</li>
+<li>302临时重定向</li>
+<li>304表示可以在缓存中取数据（协商缓存）</li>
+</ul>
+</li>
+<li>4开头表示客户端错误<ul>
+<li>403禁止请求</li>
+<li>404请求资源不存在</li>
+</ul>
+</li>
+<li>5开头表示服务端错误<ul>
+<li>500</li>
+</ul>
+</li>
+</ul>
+</div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>Horry</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="http://horry233.github.io/2021/03/12/%E9%9D%A2%E8%AF%95%E5%B0%8F%E7%BB%93/" title="面试小结">http://horry233.github.io/2021/03/12/%E9%9D%A2%E8%AF%95%E5%B0%8F%E7%BB%93/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> 许可协议。</li></ul></section></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2021/03/13/HTTP%E7%BC%93%E5%AD%98/" rel="prev" title="HTTP缓存"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-left-s-line"></use></svg><span class="post-nav-text">HTTP缓存</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2021/03/12/%E5%AE%9E%E7%8E%B0%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%80%92%E5%BA%8F/" rel="next" title="实现字符串的倒序"><span class="post-nav-text">实现字符串的倒序</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div id="comment"><div class="comment-tooltip text-center"><span>点击按钮跳转 GitHub Issues 评论。</span><br><span>若没有本文 Issue，您可以使用 Comment 模版新建。</span><br><a class="hty-button hty-button--raised" id="github-issues" target="_blank" rel="noopener" href="https://github.com/YunYouJun/yunyoujun.github.io/issues?q=is:issue+面试小结">GitHub Issues</a></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2021 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> Horry</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v5.0.2</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v0.9.6</span></div><div class="live_time"><span>我已经出生</span><span id="display_live_time"></span><span class="moe-text">啦(●'◡'●)</span><script>function blog_live_time() {
+  window.setTimeout(blog_live_time, 1000);
+  const start = new Date('2020-08-13T14:50:00');
+  const now = new Date();
+  const timeDiff = (now.getTime() - start.getTime());
+  const msPerMinute = 60 * 1000;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const passDay = Math.floor(timeDiff / msPerDay);
+  const passHour = Math.floor((timeDiff % msPerDay) / 60 / 60 / 1000);
+  const passMinute = Math.floor((timeDiff % msPerHour) / 60 / 1000);
+  const passSecond = Math.floor((timeDiff % msPerMinute) / 1000);
+  display_live_time.innerHTML = " " + passDay + " 天 " + passHour + " 小时 " + passMinute + " 分 " + passSecond + " 秒";
+}
+blog_live_time();
+</script></div></footer><a class="hty-icon-button" id="goUp" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a></div><script defer src="/js/utils.js"></script><script defer src="/js/hexo-theme-yun.js"></script></body></html>
